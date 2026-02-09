@@ -108,11 +108,10 @@ theorem protocolB_consistency
       obtain ⟨v_old, hv_mem, rfl⟩ := List.mem_map.1 hv
       have h_crash_v : is_leader_crashed_at_t t v_old.id = true := by {
         by_contra
-        rename_i h_id
         by_cases h₁ : ¬v_old.crashed = true;
-        . simp [h₁, h_id] at hcf hv hne
+        . simp [h₁] at hcf hv hne
           rw[← h_state_t, ← h_old_chains, ← h_longest_chains, ← h_new_chain] at hne
-          simp at hne
+          simp_all
         . simp at h₁
           simp[h₁] at hcf
       }
